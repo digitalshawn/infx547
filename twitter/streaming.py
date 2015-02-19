@@ -9,23 +9,25 @@ import tweepy
 
 class StreamWatcherListener(tweepy.StreamListener):
 
-    status_wrapper = TextWrapper(width=60, initial_indent='    ', subsequent_indent='    ')
+    status_wrapper = TextWrapper(width=60, initial_indent='    ',
+                                 subsequent_indent='    ')
 
     def on_status(self, status):
         try:
             print(self.status_wrapper.fill(status.text))
-            print('\n %s  %s  via %s\n' % (status.author.screen_name, status.created_at, status.source))
+            print('\n %s  %s  via %s\n' % (status.author.screen_name,
+                                           status.created_at, status.source))
         except:
             # Catch any unicode errors while printing to console
             # and just ignore them to avoid breaking application.
             pass
 
     def on_error(self, status_code):
-        print ('An error has occured! Status code = %s' % status_code)
+        print('An error has occured! Status code = %s' % status_code)
         return True  # keep stream alive
 
     def on_timeout(self):
-        print ('Snoozing Zzzzzz')
+        print('Snoozing Zzzzzz')
 
 
 def main():
@@ -57,17 +59,17 @@ def main():
             follow_list = [u for u in follow_list.split(',')]
             userid_list = []
             username_list = []
-            
+
             for user in follow_list:
                 if user.isdigit():
                     userid_list.append(user)
                 else:
                     username_list.append(user)
-            
+
             for username in username_list:
                 user = tweepy.API().get_user(username)
                 userid_list.append(user.id)
-            
+
             follow_list = userid_list
         else:
             follow_list = None
@@ -75,7 +77,7 @@ def main():
             track_list = [k for k in track_list.split(',')]
         else:
             track_list = None
-        print(follow_list, track_list)
+        print("Follow list: ', follow_list, 'Track keywords: ', track_list)
         stream.filter(follow_list, track_list)
 
 
@@ -84,4 +86,3 @@ if __name__ == '__main__':
         main()
     except KeyboardInterrupt:
         print('\nGoodbye!')
-
