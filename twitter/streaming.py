@@ -77,13 +77,9 @@ def main():
             track_list = [k for k in track_list.split(',')]
         else:
             track_list = None
-        print("Follow list: ', follow_list, 'Track keywords: ', track_list)
-        if follow_list and track_list:
-            stream.filter(follow_list, track_list)
-        elif track_list:
-            stream.filter(track_list)
-        else:
-            stream.filter(follow_list)
+
+        print('Follow list: ', follow_list, 'Track keywords: ', track_list)
+        stream.filter(follow_list, track_list)
 
 
 if __name__ == '__main__':
