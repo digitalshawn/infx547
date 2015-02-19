@@ -7,6 +7,6 @@ In this folder you'll find example code to connect to the Streaming and REST
 * streaming.py -- an interactive script to connect to the streaming API using
   the sample or filter endpoints.
 
-'''
+```
 python3 streaming.py
-'''
+```
